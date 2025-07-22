@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Celeste.Mod.Celeste_Multiworld.Celeste_MultiworldModuleSettings;
 
 namespace Celeste.Mod.Celeste_Multiworld.Items
 {
@@ -26,9 +27,16 @@ namespace Celeste.Mod.Celeste_Multiworld.Items
 
         public static bool HaveReceived()
         {
-            bool haveReceived = false;
-            Celeste_MultiworldModule.SaveData.Interactables.TryGetValue(0xCA12001, out haveReceived);
-            return haveReceived;
+            LocationState state = Celeste_MultiworldModule.Settings.TrafficBlocks;
+            switch (state)
+            {
+                case LocationState.ForceOn: return true;
+                case LocationState.ForceOff: return false;
+                default:
+                    bool haveReceived = false;
+                    Celeste_MultiworldModule.SaveData.Interactables.TryGetValue(0xCA12001, out haveReceived);
+                    return haveReceived;
+            }
         }
 
         private static void modZipMover_Render(On.Celeste.ZipMover.orig_Render orig, ZipMover self)

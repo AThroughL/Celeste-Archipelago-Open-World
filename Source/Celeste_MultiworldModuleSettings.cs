@@ -35,4 +35,34 @@ public class Celeste_MultiworldModuleSettings : EverestModuleSettings
     public bool ChatMessages { get; set; } = true;
     public bool ServerMessages { get; set; } = true;
     #endregion
+
+    #region Debug
+    public enum LocationState
+    {
+        Automatic,
+        ForceOn,
+        ForceOff
+    }
+
+    public LocationState Slide { get; set; } = LocationState.Automatic;
+    public LocationState Grab { get; set; } = LocationState.Automatic;
+    public LocationState Climb { get; set; } = LocationState.Automatic;
+
+    public LocationState DashN { get; set; } = LocationState.Automatic;
+    public LocationState DashE { get; set; } = LocationState.Automatic;
+    public LocationState DashS { get; set; } = LocationState.Automatic;
+    public LocationState DashW { get; set; } = LocationState.Automatic;
+    public LocationState DashA { get; set; } = LocationState.Automatic;
+    public LocationState DashB { get; set; } = LocationState.Automatic;
+    public LocationState DashC { get; set; } = LocationState.Automatic;
+    public LocationState DashD { get; set; } = LocationState.Automatic;
+    public LocationState Dash2 { get; set; } = LocationState.Automatic;
+
+    public LocationState Springs { get; set; } = LocationState.Automatic;
+    public LocationState TrafficBlocks { get; set; } = LocationState.Automatic;
+    public LocationState PinkCassetteBlocks { get; set; } = LocationState.Automatic;
+    public LocationState BlueCassetteBlocks { get; set; } = LocationState.Automatic;
+    public LocationState YellowCassetteBlocks { get; set; } = LocationState.Automatic;
+    public LocationState GreenCassetteBlocks { get; set; } = LocationState.Automatic;
+    #endregion
 }

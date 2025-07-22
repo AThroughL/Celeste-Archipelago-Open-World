@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input.Touch;
+using static Celeste.Mod.Celeste_Multiworld.Celeste_MultiworldModuleSettings;
 
 namespace Celeste.Mod.Celeste_Multiworld.Items
 {
@@ -62,9 +64,23 @@ namespace Celeste.Mod.Celeste_Multiworld.Items
 
         internal static bool HaveReceived(BlockColor color)
         {
-            bool haveReceived = false;
-            Celeste_MultiworldModule.SaveData.Interactables.TryGetValue((long)color, out haveReceived);
-            return haveReceived;
+            LocationState state = LocationState.Automatic;
+            switch (color)
+            {
+                case BlockColor.Pink: state = Celeste_MultiworldModule.Settings.PinkCassetteBlocks; break;
+                case BlockColor.Blue: state = Celeste_MultiworldModule.Settings.BlueCassetteBlocks; break;
+                case BlockColor.Yellow: state = Celeste_MultiworldModule.Settings.YellowCassetteBlocks; break;
+                case BlockColor.Green: state = Celeste_MultiworldModule.Settings.GreenCassetteBlocks; break;
+            }
+            switch (state)
+            {
+                case LocationState.ForceOn: return true;
+                case LocationState.ForceOff: return false;
+                default:
+                    bool haveReceived = false;
+                    Celeste_MultiworldModule.SaveData.Interactables.TryGetValue((long)color, out haveReceived);
+                    return haveReceived;
+            }
         }
     }
 }

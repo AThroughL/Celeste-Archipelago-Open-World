@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input.Touch;
+using static Celeste.Mod.Celeste_Multiworld.Celeste_MultiworldModuleSettings;
 
 namespace Celeste.Mod.Celeste_Multiworld.Items
 {
@@ -31,9 +33,16 @@ namespace Celeste.Mod.Celeste_Multiworld.Items
 
         public static bool HaveReceived()
         {
-            bool haveReceived = false;
-            Celeste_MultiworldModule.SaveData.Interactables.TryGetValue(0xCA12000, out haveReceived);
-            return haveReceived;
+            LocationState state = Celeste_MultiworldModule.Settings.Springs;
+            switch (state)
+            {
+                case LocationState.ForceOn: return true;
+                case LocationState.ForceOff: return false;
+                default:
+                    bool haveReceived = false;
+                    Celeste_MultiworldModule.SaveData.Interactables.TryGetValue(0xCA12000, out haveReceived);
+                    return haveReceived;
+            }
         }
 
         private static void modSpring_Render(On.Celeste.Spring.orig_Render orig, Spring self)
